@@ -18,7 +18,7 @@ export default function ManagerDashboard() {
     const fetchTeamData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('/api/manager/team-status', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/manager/team-status`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
@@ -76,7 +76,7 @@ export default function ManagerDashboard() {
     setIsSubmitting(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/manager/submit-feedback', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/manager/submit-feedback`, {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',

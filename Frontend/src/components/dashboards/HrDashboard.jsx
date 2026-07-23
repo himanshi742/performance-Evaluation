@@ -11,7 +11,7 @@ export default function HrDashboard() {
     const fetchAuditData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('/api/hr/pending-track', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hr/pending-track`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

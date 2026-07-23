@@ -21,7 +21,7 @@ export default function EmployeeDashboard() {
     const fetchHistory = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('/api/employee/my-history', {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/employee/my-history`, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         const data = await response.json();
@@ -30,20 +30,20 @@ export default function EmployeeDashboard() {
           // 1. Format data for the Recharts graph
           const formattedChartData = data.history.map(item => {
             const dataPoint = { month: item.cycleTitle.split(' ')[0] }; // e.g., Extract "July" from "July 2026"
-            
+
             item.ratings.forEach(r => {
               const label = paramLabels[r.parameterId];
               if (label) dataPoint[label] = r.score;
             });
             return dataPoint;
           });
-          
+
           setPerformanceHistory(formattedChartData);
 
           // 2. Format details for the latest month's feedback breakdown
           const latest = data.history[data.history.length - 1];
           setLatestCycle(latest.cycleTitle);
-          
+
           const formattedRecent = latest.ratings.map(r => ({
             param: paramLabels[r.parameterId] || r.parameterId,
             score: r.score,
@@ -79,7 +79,7 @@ export default function EmployeeDashboard() {
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-10">
-      
+
       {/* Header section */}
       <div className="border-b border-slate-200 pb-4">
         <h1 className="text-2xl font-bold text-slate-900">My Performance Profile</h1>
@@ -94,7 +94,7 @@ export default function EmployeeDashboard() {
             <h2 className="font-semibold text-slate-800">Score Trends</h2>
           </div>
         </div>
-        
+
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={performanceHistory} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
@@ -103,7 +103,7 @@ export default function EmployeeDashboard() {
               <YAxis domain={[1, 5]} ticks={[1, 2, 3, 4, 5]} axisLine={false} tickLine={false} tick={{ fill: '#64748b', fontSize: 12 }} />
               <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
               <Legend iconType="circle" wrapperStyle={{ paddingTop: '20px', fontSize: '12px' }} />
-              
+
               <Line type="monotone" dataKey="Ownership" stroke="#0ea5e9" strokeWidth={2} dot={{ r: 4 }} activeDot={{ r: 6 }} />
               <Line type="monotone" dataKey="Communication" stroke="#8b5cf6" strokeWidth={2} dot={{ r: 4 }} />
               <Line type="monotone" dataKey="Quality" stroke="#10b981" strokeWidth={2} dot={{ r: 4 }} />
