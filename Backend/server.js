@@ -16,7 +16,13 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors()); // Allows your Vite app (port 5173) to communicate with this API
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://performance-evaluation-dusky.vercel.app"
+  ],
+  credentials: true
+})); // Allows your Vite app (port 5173) to communicate with this API
 app.use(express.json()); // Parses incoming JSON requests
 
 // Basic health check route
