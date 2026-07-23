@@ -277,7 +277,7 @@ The backend deployment uses a Vercel configuration that routes all requests thro
 
 ## Author
 
-**Ashu Bisht**
+**Himanshi Bisht**
 
 GitHub: https://github.com/yourusername
 
