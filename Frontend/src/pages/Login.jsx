@@ -42,7 +42,7 @@ export default function Login() {
     }
   };
 
-  // Helper to auto-fill the form for rapid testing
+ 
   const autoFill = (testEmail) => {
     setEmail(testEmail);
     setPassword('PilotPass123!');
@@ -102,7 +102,7 @@ export default function Login() {
         </form>
       </div>
 
-      {/* Pilot Testing Credentials Card */}
+      
       <div className="w-full max-w-md mt-6 bg-blue-50 rounded-xl border border-blue-100 p-5">
         <div className="flex items-center gap-2 mb-3 text-blue-800 font-semibold">
           <Key className="w-4 h-4" />
@@ -129,6 +129,10 @@ export default function Login() {
           <button onClick={() => autoFill('siddharth@brightpath.com')} className="w-full flex justify-between items-center text-left p-2 rounded-md hover:bg-blue-100 transition-colors border border-transparent hover:border-blue-200">
             <span className="text-sm font-medium text-blue-900">Founder (Bright Path)</span>
             <span className="text-xs font-mono text-blue-700">siddharth@...</span>
+          </button>
+          <button onClick={() => autoFill('amitav@brightpath.com')} className="w-full flex justify-between items-center text-left p-2 rounded-md hover:bg-blue-100 transition-colors border border-transparent hover:border-blue-200">
+            <span className="text-sm font-medium text-blue-900">Employee (Bright Path)</span>
+            <span className="text-xs font-mono text-blue-700">amitav@...</span>
           </button>
         </div>
         

@@ -78,6 +78,8 @@ async function seedDatabase() {
       managerId: rohan._id
     });
 
+
+
     // Priya's 6 Team Members
     const priyaTeamNames = ['Aarav Patel', 'Diya Iyer', 'Kabir Singh', 'Ananya Roy', 'Rohan Das', 'Meera Joshi'];
     const priyaTeam = [];
@@ -163,22 +165,39 @@ async function seedDatabase() {
 
     // 8 Direct Reports to Founder (No Middle Layer)
     const bpTeamNames = [
-      'Amitav Ghosh', 'Bhavna Kulkarni', 'Chirag Kapoor', 'Devika Nair',
-      'Esha Gupta', 'Farhan Qureshi', 'Gaurav Taneja', 'Harini Rao'
-    ];
+  'Amitav Ghosh',
+  'Bhavna Kulkarni',
+  'Chirag Kapoor',
+  'Devika Nair',
+  'Esha Gupta',
+  'Farhan Qureshi',
+  'Gaurav Taneja',
+  'Harini Rao'
+];
 
-    for (let i = 0; i < bpTeamNames.length; i++) {
-      await User.create({
-        companyId: brightPath._id,
-        name: bpTeamNames[i],
-        email: `consultant${i + 1}@brightpath.com`,
-        passwordHash,
-        role: 'EMPLOYEE',
-        designation: 'Management Consultant',
-        department: 'Strategy',
-        managerId: founder._id // Points directly to founder
-      });
-    }
+const bpEmails = [
+  'amitav@brightpath.com',
+  'bhavna@brightpath.com',
+  'chirag@brightpath.com',
+  'devika@brightpath.com',
+  'esha@brightpath.com',
+  'farhan@brightpath.com',
+  'gaurav@brightpath.com',
+  'harini@brightpath.com'
+];
+
+for (let i = 0; i < bpTeamNames.length; i++) {
+  await User.create({
+    companyId: brightPath._id,
+    name: bpTeamNames[i],
+    email: bpEmails[i],
+    passwordHash,
+    role: 'EMPLOYEE',
+    designation: 'Management Consultant',
+    department: 'Strategy',
+    managerId: founder._id
+  });
+}
 
     await FeedbackCycle.create({
       companyId: brightPath._id,

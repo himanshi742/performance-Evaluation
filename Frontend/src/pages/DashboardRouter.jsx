@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Import all our completed dashboards
+
 import HrDashboard from '../components/dashboards/HrDashboard';
 import ManagerDashboard from '../components/dashboards/ManagerDashboard';
 import EmployeeDashboard from '../components/dashboards/EmployeeDashboard';
@@ -11,11 +11,11 @@ export default function DashboardRouter() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if a user is logged in (we will set this up properly with the backend later)
+    
     const storedUser = localStorage.getItem('user');
     
     if (!storedUser) {
-      // If no user is found, kick them back to the login page
+     
       navigate('/login'); 
       return;
     }
@@ -29,7 +29,7 @@ export default function DashboardRouter() {
     navigate('/login');
   };
 
-  // Show a loading state while checking credentials
+  
   if (!user) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
@@ -40,7 +40,7 @@ export default function DashboardRouter() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Global Navigation Bar */}
+     
       <nav className="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center shadow-sm">
         <div className="flex items-center space-x-3">
           <span className="font-bold text-xl tracking-tight text-blue-600">Aura</span>
@@ -64,14 +64,14 @@ export default function DashboardRouter() {
         </div>
       </nav>
 
-      {/* Dynamic Role-Based Rendering */}
+      
       <main className="flex-1 p-6">
         {user.role === 'HR_ADMIN' && <HrDashboard />}
         
-        {/* Founders and Managers both evaluate direct reports */}
+        
         {(user.role === 'MANAGER' || user.role === 'FOUNDER') && <ManagerDashboard />}
         
-        {/* Employees view their performance charts */}
+        
         {user.role === 'EMPLOYEE' && <EmployeeDashboard />}
       </main>
     </div>
